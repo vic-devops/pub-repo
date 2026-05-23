@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Compiling...'
-                sh 'sudo install nginx' // Execute shell commands
+                sh 'sudo install nginx -y' // Execute shell commands
             }
         }
         stage('Test') {
