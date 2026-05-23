@@ -15,12 +15,13 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'ls'
+                sh 'ls -a ~/'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'cat /etc/passwd'
+                echo 'i want my deployment'
+                sh 'cat /etc/passwd'
             }
         }
     
