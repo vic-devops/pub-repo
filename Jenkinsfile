@@ -15,7 +15,7 @@ pipeline {
         }
         stage('install') {
             steps {
-                echo 'installation'
+                echo 'installation of nginx'
                 sh 'sudo apt install nginx -y' // Execute shell commands
             }
         }
