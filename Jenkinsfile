@@ -6,16 +6,16 @@ pipeline {
     // }
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Compiling...'
-                sh 'sudo install nginx -y' // Execute shell commands
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         echo 'Compiling...'
+        //         sh 'sudo install nginx -y' // Execute shell commands
+        //     }
+        // }
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'ls -a ~/'
+                sh 'ls -a'
             }
         }
         stage('Deploy') {
