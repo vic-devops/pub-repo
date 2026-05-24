@@ -1,37 +1,38 @@
 pipeline {
-    agent any // Run on any available Jenkins agent
-
-    // environment {
-    //     CI = 'true' // Define environment variables
-    // }
+    agent any
 
     stages {
+        stage('Update Package Index') {
+            steps {
+                // Refresh local package lists to get the latest versions
+                sh 'sudo apt update'
+            }
+        }
 
-        stage('update') {
+        stage('Install Nginx') {
             steps {
-                echo 'updating'
-                sh 'sudo apt update' // Execute shell commands
+                // Install Nginx without manual confirmation prompts (-y)
+                sh 'sudo apt install -y nginx'
             }
         }
-        stage('install') {
+
+        stage('Verify Installation') {
             steps {
-                echo 'installation of nginx'
-                sh 'sudo apt install nginx -y' // Execute shell commands
+                // Check if Nginx is active and running
+                sh 'systemctl status nginx'
+                // Confirm Nginx version
+                sh 'nginx -v'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'list'
-                sh 'ls -a /var/lib/jenkins'
-            }
+    }
+
+    post {
+        success {
+            echo 'Nginx has been successfully installed and started on Ubuntu!'
         }
-        stage('Deploy') {
-            steps {
-                echo 'show system users'
-                sh 'cat /etc/passwd'
-            }
+        failure {
+            echo 'Nginx installation failed. Check the logs for details.'
         }
-    
     }
 }
 
