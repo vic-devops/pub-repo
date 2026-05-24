@@ -6,21 +6,28 @@ pipeline {
     // }
 
     stages {
-        // stage('Build') {
-        //     steps {
-        //         echo 'Compiling...'
-        //         sh 'sudo install nginx -y' // Execute shell commands
-        //     }
-        // }
+
+        stage('update') {
+            steps {
+                echo 'updating'
+                sh 'sudo apt update' // Execute shell commands
+            }
+        }
+        stage('install') {
+            steps {
+                echo 'installation'
+                sh 'sudo apt install nginx -y' // Execute shell commands
+            }
+        }
         stage('Test') {
             steps {
-                echo 'Testing...'
-                sh 'ls -a'
+                echo 'list'
+                sh 'ls -a /var/lib/jenkins'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'i want my deployment'
+                echo 'show system users'
                 sh 'cat /etc/passwd'
             }
         }
